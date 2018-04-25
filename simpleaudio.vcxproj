@@ -153,22 +153,25 @@ xcopy "$(ProjectDir)simpleaudio.h" "$(SolutionDir)$(Configuration)\simpleaudio" 
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="simpleaudio.h" />
     <ClInclude Include="iterator.h" />
     <ClInclude Include="iterator.hpp" />
-    <ClInclude Include="simpleaudio.h" />
+    <ClInclude Include="simpleaudio.win.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="winconstants.hpp" />
+    <ClInclude Include="winhelpers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="iterator-impl.cpp" />
-    <ClCompile Include="simpleaudio.cpp" />
+    <ClCompile Include="simpleaudio.win.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="winhelpers.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

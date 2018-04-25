@@ -1,8 +1,10 @@
 #pragma once
 
+#include "simpleaudio.h"
+
 namespace iterator
 {
-	template<class T>
+	template<typename T>
 	class IIteratorProfile
 	{
 	public:
@@ -10,8 +12,8 @@ namespace iterator
 		virtual unsigned int count() = 0;
 	};
 
-	template<class T>
-	class Iterator
+	template<typename T>
+	class Iterator : public simpleaudio::IIterator<T>
 	{
 	private:
 		IIteratorProfile<T> * itProf;

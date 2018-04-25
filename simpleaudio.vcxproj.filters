@@ -21,13 +21,22 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="simpleaudio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="iterator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="iterator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="simpleaudio.h">
+    <ClInclude Include="simpleaudio.win.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winconstants.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winhelpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,13 +44,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="simpleaudio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="iterator-impl.cpp">
+    <ClCompile Include="winhelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="simpleaudio.win.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

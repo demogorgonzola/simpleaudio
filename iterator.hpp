@@ -4,7 +4,7 @@
 
 namespace iterator
 {
-	template<class T>
+	template<typename T>
 	Iterator<T>::Iterator(IIteratorProfile<T> *itProf)
 	{
 		this->itProf = itProf;
@@ -12,20 +12,20 @@ namespace iterator
 		count = itProf->count();
 	}
 
-	template<class T>
+	template<typename T>
 	Iterator<T>::~Iterator()
 	{
 		delete itProf;
 	}
 
-	template<class T>
+	template<typename T>
 	void Iterator<T>::next(T **ppT)
 	{
 		itProf->get(index, ppT);
 		index++;
 	}
 
-	template<class T>
+	template<typename T>
 	bool Iterator<T>::hasNext()
 	{
 		return (index < count);
