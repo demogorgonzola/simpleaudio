@@ -13,21 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Interface Files">
+      <UniqueIdentifier>{84e5f5f0-1422-4894-a0e4-bcb0ffea6f71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Template Files">
+      <UniqueIdentifier>{91c21af2-149e-4774-b067-48eefcca5134}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="simpleaudio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="iterator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="iterator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="simpleaudio.win.h">
@@ -37,6 +34,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="winhelpers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="simpleaudio.h">
+      <Filter>Interface Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iterator.h">
+      <Filter>Template Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iterator.hpp">
+      <Filter>Template Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iterator-impl.win.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -51,6 +60,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="simpleaudio.win.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="iterator-impl.win.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

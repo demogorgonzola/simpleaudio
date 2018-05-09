@@ -1,13 +1,18 @@
 #pragma once
 
 #include "simpleaudio.h"
-#include "iterator.h"
+#include "wincallbacks.h"
 
+#include <map>
 #include <string>
+
 #include <mmdeviceapi.h>
 #include <audioclient.h>
 #include <audiopolicy.h>
 #include <endpointvolume.h>
+
+using std::map;
+using std::wstring;
 
 namespace simpleaudio_win
 {
@@ -15,91 +20,74 @@ namespace simpleaudio_win
 	class Device;
 	class Session;
 
-	class DeviceIteratorProfile;
-	class SessionIteratorProfile;
-
-	/* Audio Devices Interface */
+	/* Simple Audio Interface */
 	class Interface : public simpleaudio::IInterface
 	{
 	public:
 		Interface();
 		~Interface();
-		void getDefaultDevice(simpleaudio::IDevice **ppDevice);
-		//void isDefaultDevice(simpleaudio::IDevice *pDevice);
-		void deviceIterator(simpleaudio::IIterator<simpleaudio::IDevice> **ppDeviceIterator);
+		EFLAG getDefaultDevice(simpleaudio::IDevice **ppDevice);
+		EFLAG isDefaultDevice(simpleaudio::IDevice *pDevice, bool *pRet);
+		EFLAG deviceIterator(simpleaudio::IIterator<simpleaudio::IDevice *> **ppDeviceIterator);
 
 	private:
+		void generateWrappers();
+		void destroyWrappers();
+		simpleaudio::IDevice * generateWrapper(IMMDevice *pMMDevice);
+		simpleaudio::IDevice * fetchDefaultDevice();
+
 		IMMDeviceEnumerator * pEnumerator;
 
-		friend DeviceIteratorProfile;
+		map<IMMDevice *, simpleaudio::IDevice *> *pDevices;
 	};
 
 	/* Audio Device */
 	class Device : public simpleaudio::IDevice
 	{
 	public:
+		Device(IMMDevice * pDevice);
 		~Device();
-		void setVolume(float percent);
-		float getVolume();
-		void getName(wchar_t *friendlyName, int len);
-		void sessionIterator(simpleaudio::IIterator<simpleaudio::ISession> **ppSessionIterator);
+		EFLAG setVolume(float percent);
+		EFLAG getVolume(float *pRet);
+		EFLAG mute(bool *pRet);
+		EFLAG isMuted(bool *pRet);
+		EFLAG getName(wchar_t *name, int len);
+		EFLAG sessionIterator(simpleaudio::IIterator<simpleaudio::ISession *> **ppSessionIterator);
 
 	private:
-		Device(IMMDevice * pDevice);
+		void generateWrappers();
+		void destroyWrappers();
+		simpleaudio::ISession * generateWrapper(IAudioSessionControl *pSessionControl);
+		float fetchVolume();
+		bool fetchMute();
+		wstring *fetchName();
 
 		IMMDevice * pDevice;
-		IAudioEndpointVolume *	pVolume;
+		IAudioEndpointVolume * pVolume;
+		IPropertyStore *pProperties;
 
-		friend Interface;
-		friend DeviceIteratorProfile;
-		friend SessionIteratorProfile;
+		map<IAudioSessionControl *, simpleaudio::ISession *> *pSessions;
 	};
 
 	/* Audio Session */
 	class Session : public simpleaudio::ISession
 	{
 	public:
+		Session(IAudioSessionControl * pSession);
 		~Session();
-		void setVolume(float percent);
-		float getVolume();
-		void getName(wchar_t *sessionName, int len);
-		//HICON getIcon();
+		EFLAG setVolume(float percent);
+		EFLAG getVolume(float *pRet);
+		EFLAG mute(bool *pRet);
+		EFLAG isMuted(bool *pRet);
+		EFLAG getName(wchar_t *name, int len);
 
 	private:
-		Session(IAudioSessionControl * pSession);
+		float fetchVolume();
+		bool fetchMute();
+		void fetchName(wchar_t *sessionName, int len);
 
 		IAudioSessionControl * pSession;
 		ISimpleAudioVolume *	pVolume;
-
-		friend SessionIteratorProfile;
-	};
-
-	//
-
-	/* Iterator Profiles */
-	class DeviceIteratorProfile : public iterator::IIteratorProfile<simpleaudio::IDevice>
-	{
-	public:
-		DeviceIteratorProfile(IMMDeviceEnumerator *pEnumerator);
-		~DeviceIteratorProfile();
-		void get(unsigned int index, simpleaudio::IDevice **ppDevice); //returns heap object
-		unsigned int count();
-
-	private:
-		DeviceIteratorProfile(Interface *pInterface);
-		IMMDeviceCollection * pDevices;
-	};
-
-	class SessionIteratorProfile : public iterator::IIteratorProfile<simpleaudio::ISession>
-	{
-	public:
-		SessionIteratorProfile(IMMDevice * pDevice);
-		~SessionIteratorProfile();
-		void get(unsigned int index, simpleaudio::ISession **ppDevice); //returns heap object
-		unsigned int count();
-
-	private:
-		IAudioSessionEnumerator * pSessionEnumerator;
 	};
 }
 

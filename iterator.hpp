@@ -2,6 +2,8 @@
 
 #include "iterator.h"
 
+#include <iostream>
+
 namespace iterator
 {
 	template<typename T>
@@ -19,9 +21,9 @@ namespace iterator
 	}
 
 	template<typename T>
-	void Iterator<T>::next(T **ppT)
+	void Iterator<T>::next(T *pT)
 	{
-		itProf->get(index, ppT);
+		itProf->get(index, pT);
 		index++;
 	}
 
@@ -29,5 +31,35 @@ namespace iterator
 	bool Iterator<T>::hasNext()
 	{
 		return (index < count);
+	}
+
+	/* MapValue Iterator Profile */
+	template<typename T, typename U>
+	MapValueIteratorProfile<T, U>::MapValueIteratorProfile(std::map<T, U> *pUs)
+	{
+		this->pUs = new vector<U>();
+		typename map<T, U>::iterator it;
+		for (it = pUs->begin(); it != pUs->end(); ++it)
+		{
+			this->pUs->push_back(it->second);
+		}
+	}
+
+	template<typename T, typename U>
+	MapValueIteratorProfile<T, U>::~MapValueIteratorProfile()
+	{
+		delete pUs;
+	}
+
+	template<typename T, typename U>
+	void MapValueIteratorProfile<T, U>::get(unsigned int index, U *pU)
+	{
+		*pU = pUs->at(index);
+	}
+
+	template<typename T, typename U>
+	unsigned int MapValueIteratorProfile<T, U>::count()
+	{
+		return pUs->size();
 	}
 }

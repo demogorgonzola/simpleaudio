@@ -7,7 +7,8 @@
 
 namespace winconstants
 {
-	//class and interface id's not needed..for now
+	// {EF953D1F-6059-4BA4-A73C-49096016F577}
+	static const GUID program_id = { 0xef953d1f, 0x6059, 0x4ba4,{ 0xa7, 0x3c, 0x49, 0x9, 0x60, 0x16, 0xf5, 0x77 } };
 	const CLSID CLSID_MMDeviceEnumerator = __uuidof(MMDeviceEnumerator);
 	const IID IID_IMMDeviceEnumerator = __uuidof(IMMDeviceEnumerator);
 	const IID IID_IAudioEndpointVolume = __uuidof(IAudioEndpointVolume);
